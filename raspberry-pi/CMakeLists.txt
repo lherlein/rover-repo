@@ -1,43 +1,26 @@
-# Minimum CMake version and project definition
-cmake_minimum_required(VERSION 3.10)
-project(RaspberryPiRobot)
+cmake_minimum_required(VERSION 3.14)
+project(robot)
 
-# Specify C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories for custom headers
-include_directories(
-    ${CMAKE_SOURCE_DIR}/include           # Custom headers
+# Include the headers
+include_directories(include)
+
+# Find and link wiringPi and i2c libraries
+find_library(WIRINGPI_LIB wiringPi REQUIRED)
+find_library(I2C_LIB i2c REQUIRED)
+
+# Define the executable and source files
+add_executable(robot
+  src/main.cpp
+  src/mpu6050.cpp
+  src/tinygps.cpp
+  src/ultrasonic.cpp
 )
 
-# Find WiringPi (already installed on the Pi)
-find_library(WIRINGPI_LIB wiringPi)
-if (NOT WIRINGPI_LIB)
-    message(FATAL_ERROR "WiringPi library not found!")
-endif()
-
-# Find I2C library (already installed on the Pi)
-find_library(I2C_LIB i2c)
-if (NOT I2C_LIB)
-    message(FATAL_ERROR "I2C library not found!")
-endif()
-
-# Gather source files
-file(GLOB SRC_FILES "src/*.cpp")           # Main source files
-file(GLOB LIB_FILES "libs/sensors/*.cpp")   # Custom library source files
-
-# Create a static library from custom code
-add_library(sensors STATIC ${LIB_FILES})
-
-# Create executable
-add_executable(robot ${SRC_FILES})
-
-# Link custom library, WiringPi, and I2C to the executable
+# Link external libraries
 target_link_libraries(robot
-  sensors     # Custom C++ logic
-  ${WIRINGPI_LIB} # WiringPi (GPIO control)
-  ${I2C_LIB}      # I2C communication
-  pthread         # Threading support
-  rt              # Real-time clock support
+  ${WIRINGPI_LIB}
+  ${I2C_LIB}
 )

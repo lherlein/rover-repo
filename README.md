@@ -16,8 +16,7 @@ sudo apt-get install wiringpi libi2c-dev build-essential cmake
 ```
 rm -rf build && mkdir build && cd build
 cmake ..
-make
-cd ..
+cmake --build .
 ```
 
 ## home-base

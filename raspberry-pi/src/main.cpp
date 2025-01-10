@@ -10,6 +10,11 @@
 #include "tinygps.h"
 #include "mpu6050.h"
 
+int main() {
+  std::cout << "Hello, World!" << std::endl;
+  return 0;
+}
+
 // Include PWM and Wi-Fi setup libraries
 // #include "PWMController.h"
 // #include "WiFiManager.h"
