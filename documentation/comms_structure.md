@@ -61,3 +61,7 @@ sequenceDiagram
     Ground Station ->> Drone: "ACK"
   end
 ```
+
+## State Machine Implications
+
+Communication is done on top of the state machine but still may affect it. If the ground station misses 5 heartbeats or the drone misses 5 'ACK's, communication is considered lost and the rover enteres STANDBY state.
