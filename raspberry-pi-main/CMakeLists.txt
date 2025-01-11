@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(robot)
+project(robot-main)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,15 +12,15 @@ find_library(WIRINGPI_LIB wiringPi REQUIRED)
 find_library(I2C_LIB i2c REQUIRED)
 
 # Define the executable and source files
-add_executable(robot
+add_executable(robot-main
   src/main.cpp
-  src/mpu6050.cpp
-  src/tinygps.cpp
-  src/ultrasonic.cpp
+  src/sensors/mpu6050.cpp
+  src/sensors/tinygps.cpp
+  src/sensors/ultrasonic.cpp
 )
 
 # Link external libraries
-target_link_libraries(robot
+target_link_libraries(robot-main
   ${WIRINGPI_LIB}
   ${I2C_LIB}
 )
