@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <termios.h>
 
-std::string readGPS(char *port) {
+std::string readGPS(const char *port) {
   int uart0 = open(port, O_RDWR | O_NOCTTY | O_NDELAY);
   if (uart0 == -1) {
     std::cerr << "Failed to open UART." << std::endl;

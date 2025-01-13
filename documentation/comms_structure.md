@@ -45,6 +45,13 @@ Here semi-colons separate data type, double colons indicate multiple pieces of d
 
 Telemetry data requires no response and is sent at a fixed Telemetry transfer rate. The rover considers telemetry to be 'fire and forget'. 
 
+```mermaid
+sequenceDiagram
+  loop 20hz
+    Drone ->> Ground Station: telemetry
+  end
+```
+
 ## Heartbeat
 
 The heartbeat is a super simple, 1hz message that contains the drone UID. It is sent from the drone to the ground station and has a simple `ACK` response. This serves two purposes:
@@ -57,8 +64,9 @@ The amount of heartbeats needed before the connection is considered lost is vari
 ```mermaid
 sequenceDiagram
   loop 1Hz
-    Drone ->> Ground Station: "UID"
-    Ground Station ->> Drone: "ACK"
+    Drone ->> Ground Station: UID:heartbeat
+    Ground Station ->> Drone: UID:heartbeat_response
+    Drone ->> Ground Station: UID:heartbeat_response:ACK
   end
 ```
 
