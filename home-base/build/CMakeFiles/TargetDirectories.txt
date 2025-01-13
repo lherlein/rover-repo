@@ -1,3 +1,0 @@
-/home/luca/personalCode/rover-code/home-base/build/CMakeFiles/ground-station.dir
-/home/luca/personalCode/rover-code/home-base/build/CMakeFiles/edit_cache.dir
-/home/luca/personalCode/rover-code/home-base/build/CMakeFiles/rebuild_cache.dir

@@ -1,1 +1,0 @@
-/usr/bin/c++ "CMakeFiles/ground-station.dir/src/main.cpp.o" -o ground-station
